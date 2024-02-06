@@ -1,49 +1,10 @@
-name: Auto Devops QA Merge2
-on:
-  pull_request:
-    branches:
-      - ST
-    paths:
-      - '**/**'
-      - '!.github/**'
-    types:
-      - opened
-  pull_request_review:
-    types:
-      - submitted
-    check_suite:
-      types:
-        - completed
-    status: { }
- 
+name: CI
+on: [push]
 jobs:
-  EDIZON:
+  build:
     runs-on: ubuntu-latest
     steps:
-        - name: Create annotation for build error
-          run: echo "::error file=app.js,line=1::Missing semicolon"
-  automerge:
-    runs-on: ubuntu-latest
-    steps:
- 
-      # DO QA AUTO-MERGE ===============================================================================================
-      - id: automerge
-        name: Merge Pull Request
-        if: startsWith(github.event.pull_request.title, vars.REQ) && startsWith(github.head_ref, vars.ORIGEN_QA)
-        uses: bdb-dns/bbog-ap-comunes-lib@ci/cd-Automerged
+      - uses: juliangruber/merge-pull-request-action@master
         with:
-          comment: Pull request aprobad
-          github-token: ${{ secrets.MERGE_AUTOMATICO_ST }}
-          number: ${{ github.event.pull_request.number }}
-          method: merge
-      # FEEDBACK IF PULL REQUEST REQUIREMENT/US/HU IS INCORRECT ========================================================
-      - id: reject
-        name: Feedback - Validation if rejected
-        #if: ${{ !startsWith(github.event.pull_request.title, vars.REQ) }}
-        if: "!startsWith(github.event.pull_request.title, vars.REQ) || !startsWith(github.head_ref, vars.ORIGEN_QA)"
-        uses: bdb-dns/bbog-ap-comunes-lib@ci/cd-Automerged
-        with:
-          token: ${{ secrets.MERGE_AUTOMATICO_ST }}
-          pull-request-number: ${{ github.event.pull_request.number }}
-          comment: Pull request rechazado porque el requerimiento asociado o la rama origen no son validos
-          delete-branch: false
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: 1
