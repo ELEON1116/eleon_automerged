@@ -1,0 +1,27 @@
+name: Auto Devops QA MergeST
+on:
+  pull_request:
+    branches:
+      - ST
+    paths:
+      - '**/**'
+      - '!.github/**'
+    types:
+      - opened
+  pull_request_review:
+    types:
+      - submitted
+    check_suite:
+      types:
+        - completed
+    status: { }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "::error file=app.js,line=1::Missing semicolon"
+      - uses: ELEON1116/eleon_automerged@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: 1
+#- name: Create annotation for build error
