@@ -2,7 +2,7 @@ name: Auto Devops QA Merge
 on:
   pull_request:
     branches:
-      - staging
+      - ST
     paths:
       - '**/**'
       - '!.github/**'
