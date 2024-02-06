@@ -2,7 +2,7 @@ name: Auto Devops QA Merge feature
 on:
   pull_request:
     branches:
-      - ST
+      - ST, QA
     #paths:
       #- '**/**'
       #- '!.github/**'
