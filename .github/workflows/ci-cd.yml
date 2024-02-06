@@ -3,18 +3,18 @@ on:
   pull_request:
     #branches:
       #- ST
-    paths:
-      - '**/**'
-      - '!.github/**'
-    types:
-      - opened
-  pull_request_review:
-    types:
-      - submitted
-    check_suite:
-      types:
-        - completed
-    status: { }
+    #paths:
+      #- '**/**'
+      #- '!.github/**'
+    #types:
+      #- opened
+  #pull_request_review:
+    #types:
+      #- submitted
+    #check_suite:
+      #types:
+        #- completed
+    #status: { }
 jobs:
   build:
     runs-on: ubuntu-latest
