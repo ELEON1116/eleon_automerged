@@ -1,4 +1,4 @@
-name: Auto Devops QA Merge
+name: Auto Devops QA Merge2
 on:
   pull_request:
     branches:
