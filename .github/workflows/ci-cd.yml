@@ -17,6 +17,11 @@ on:
     status: { }
  
 jobs:
+  EDIZON:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Create annotation for build error
+          run: echo "::error file=app.js,line=1::Missing semicolon"
   automerge:
     runs-on: ubuntu-latest
     steps:
