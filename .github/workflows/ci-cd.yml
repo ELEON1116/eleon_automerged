@@ -1,9 +1,10 @@
-name: CI
+name: CI-feature2
 on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - run: echo "::error file=app.js,line=1::Missing semicolon"
       - uses: ELEON1116/eleon_automerged@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
